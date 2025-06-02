@@ -5,6 +5,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Intel: Sustainability Through the Ages</title>
   <link rel="stylesheet" href="style.css" />
+
+  <!-- Google Fonts: Open Sans -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body>
 
@@ -26,6 +31,9 @@
       </p>
     </div>
   </header>
+
+  <!-- Mobile instructional text (shows only on mobile) -->
+  <div class="instruction-mobile">Tap cards to learn more</div>
 
   <!-- Timeline Cards Section -->
   <section>
@@ -81,7 +89,7 @@
     <div>
       <h2>2006</h2>
       <h3>Peak GHG Emissions</h3>
-      <img src="https://placehold.co/250x100" alt="Placeholder Image" />
+      <img src="img/5.jpg" alt="Intel Peak GHG Emissions" />
       <p>
         This year marks Intel's highest annual greenhouse gas emissions 
         for operations. Over subsequent years, Intel invests heavily in 
@@ -94,7 +102,7 @@
     <div>
       <h2>2020</h2>
       <h3>RISE Strategy</h3>
-      <img src="https://placehold.co/250x100" alt="Placeholder Image" />
+      <img src="img/6.jpg" alt="Intel RISE Strategy" />
       <p>
         Intel launches its RISE (Responsible, Inclusive, Sustainable, 
         Enabling) strategy and 2030 goals, aiming to drive industry-wide 
@@ -106,7 +114,7 @@
     <div>
       <h2>2022</h2>
       <h3>Net-Zero By 2040</h3>
-      <img src="https://placehold.co/250x100" alt="Placeholder Image" />
+      <img src="img/7.jpg" alt="Intel Net-Zero By 2040" />
       <p>
         Intel announces its commitment to achieve net-zero greenhouse 
         gas emissions (Scope 1 and 2) across its global operations 
@@ -118,7 +126,7 @@
     <div>
       <h2>2023</h2>
       <h3>Renewable Electricity</h3>
-      <img src="https://placehold.co/250x100" alt="Placeholder Image" />
+      <img src="img/8.jpg" alt="Intel Renewable Electricity" />
       <p>
         The company achieves 99% renewable electricity usage worldwide, 
         helping to drastically lower carbon emissions and driving progress 
@@ -130,7 +138,7 @@
     <div>
       <h2>2024</h2>
       <h3>Sustainability Summit</h3>
-      <img src="https://placehold.co/250x100" alt="Placeholder Image" />
+      <img src="img/9.jpg" alt="Intel Sustainability Summit" />
       <p>
         Intel hosts its first Sustainability Summit, uniting suppliers, 
         government officials, and industry leaders to collaborate on 
@@ -138,6 +146,43 @@
       </p>
     </div>
   </section>
-  <p>Scroll to view timeline | Hover over cards to learn more!</p>
+
+  <!-- Desktop instructional text (shows only on desktop) -->
+  <p class="instruction-desktop">Scroll to view timeline | Hover over cards to learn more!</p>
+
+  <script>
+    // Allow horizontal scrolling of the timeline section with mouse wheel (no Shift needed)
+    document.addEventListener('DOMContentLoaded', function() {
+      const timeline = document.querySelector('section');
+      if (timeline) {
+        timeline.addEventListener('wheel', function(e) {
+          if (e.deltaY !== 0) {
+            e.preventDefault();
+            // Increase scroll speed by multiplying deltaY
+            timeline.scrollLeft += e.deltaY * 2;
+          }
+        }, { passive: false });
+      }
+
+      // Mobile tap-to-reveal for timeline cards
+      function isMobile() {
+        return window.matchMedia('(max-width: 600px)').matches;
+      }
+      if (timeline) {
+        timeline.querySelectorAll('div').forEach(function(card) {
+          card.addEventListener('click', function(e) {
+            if (isMobile()) {
+              // Remove 'reveal' from all cards first
+              timeline.querySelectorAll('div.reveal').forEach(function(openCard) {
+                if (openCard !== card) openCard.classList.remove('reveal');
+              });
+              // Toggle reveal on this card
+              card.classList.toggle('reveal');
+            }
+          });
+        });
+      }
+    });
+  </script>
 </body>
 </html>
