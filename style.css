@@ -9,6 +9,7 @@ html, body {
 /* Set the body font-family to 'Open Sans', falling back to Arial, Helvetica, or sans-serif */
 body {
   font-family: 'Open Sans', Arial, Helvetica, sans-serif; /* Use Open Sans from Google Fonts */
+  background: #e8e8e8; /* Slightly darker background for the whole page */
 }
 
 /* Style for the hero section (header) */
@@ -60,6 +61,8 @@ section {
   padding: 40px 0 24px 0; /* Add space above and below */
   scroll-behavior: smooth; /* Smooth scrolling */
   overscroll-behavior-x: contain; /* Add this for smooth horizontal scrolling on mouse wheel */
+  margin: 0 10em; /* Center the section horizontally */
+  scroll-snap-type: x mandatory; /* Enable horizontal scroll snap on desktop */
 }
 
 /* Enable horizontal scrolling with mouse wheel for beginners using a simple solution */
@@ -89,6 +92,7 @@ section > div {
   transition: transform 0.2s, box-shadow 0.2s; /* Smooth hover effect */
   position: relative; /* Needed for absolute positioning overlay */
   overflow: hidden;
+  scroll-snap-align: start; /* Each card is a snap point */
 }
 
 section > div:hover {
@@ -190,15 +194,22 @@ p {
     gap: 20px;              /* Space between cards */
     align-items: center;    /* Center cards horizontally */
     padding: 24px 0;        /* Adjust padding for mobile */
+    width: 100vw;   /* Full width on mobile */
+    margin: 0;
+    scroll-snap-type: none; /* Disable scroll snap on mobile */
   }
   section > div {
     min-width: 90vw;        /* Make cards take most of the screen width */
     max-width: 95vw;
+    scroll-snap-align: none;
   }
   section img {
     width: 100%;            /* Make images fill the card width */
-    height: auto;           /* Keep image aspect ratio */
+    height: 200px;          /* Uniform height for all images on mobile */
+    object-fit: cover;      /* Crop images to fill the area without distortion */
     max-width: 350px;       /* Prevent images from being too large */
+    display: block;
+    margin: 0 auto 10px auto;
   }
   /* On mobile, allow tap to reveal card text instead of hover */
   section > div p {
