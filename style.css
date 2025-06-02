@@ -220,9 +220,4 @@ p {
     opacity: 1;
     pointer-events: auto;
   }
-  section > div:hover p {
-    /* Disable hover effect on mobile */
-    opacity: 0;
-    pointer-events: none;
-  }
 }
