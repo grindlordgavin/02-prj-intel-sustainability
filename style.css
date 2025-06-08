@@ -6,6 +6,11 @@ html, body {
   padding: 0; /* Remove default padding */
 }
 
+/* Ensure compatibility with RTL layout */
+html[dir="rtl"] body {
+  direction: rtl; /* Set text direction to RTL */
+}
+
 /* Set the body font-family to 'Open Sans', falling back to Arial, Helvetica, or sans-serif */
 body {
   font-family: 'Open Sans', Arial, Helvetica, sans-serif; /* Use Open Sans from Google Fonts */
@@ -53,7 +58,7 @@ section img {
 }
 
 /* Timeline section styles */
-section {
+.timeline {
   display: flex; /* Lay out cards in a row */
   flex-direction: row; /* Horizontal direction */
   overflow-x: auto; /* Allow horizontal scrolling */
@@ -62,25 +67,30 @@ section {
   scroll-behavior: smooth; /* Smooth scrolling */
   overscroll-behavior-x: contain; /* Add this for smooth horizontal scrolling on mouse wheel */
   margin: 0 10em; /* Center the section horizontally */
-  scroll-snap-type: x mandatory; /* Enable horizontal scroll snap on desktop */
+  /* Removed scroll-snap-type */
 }
 
 /* Enable horizontal scrolling with mouse wheel for beginners using a simple solution */
-section {
+.timeline {
   scrollbar-width: thin; /* For Firefox */
 }
 
 /* Optional: Make scrollbar more visible and styled for beginners */
-section::-webkit-scrollbar {
+.timeline::-webkit-scrollbar {
   height: 10px;
 }
-section::-webkit-scrollbar-thumb {
+.timeline::-webkit-scrollbar-thumb {
   background: #155a8a;
   border-radius: 5px;
 }
 
+/* Adjust timeline section for RTL scrolling */
+html[dir="rtl"] .timeline {
+  /* Removed scroll-snap-type and scroll-snap-align */
+}
+
 /* Card styles */
-section > div {
+.timeline > div {
   background: #fff; /* White background for cards */
   border-radius: 12px; /* Rounded corners */
   box-shadow: 0 2px 8px rgba(0,0,0,0.08); /* Subtle shadow */
@@ -92,16 +102,21 @@ section > div {
   transition: transform 0.2s, box-shadow 0.2s; /* Smooth hover effect */
   position: relative; /* Needed for absolute positioning overlay */
   overflow: hidden;
-  scroll-snap-align: start; /* Each card is a snap point */
+  /* Removed scroll-snap-align */
 }
 
-section > div:hover {
+.timeline > div:hover {
   transform: translateY(-6px) scale(1.03); /* Lift card on hover */
   box-shadow: 0 6px 20px rgba(0,0,0,0.15); /* Stronger shadow on hover */
 }
 
+/* Adjust card hover effect for RTL */
+html[dir="rtl"] .timeline > div:hover {
+  transform: translateY(-6px) scale(1.03); /* Maintain hover effect */
+}
+
 /* Hide the text in the p tag of each card by default and show it on hover */
-section > div p {
+.timeline > div p {
   opacity: 0; /* Hide text */
   pointer-events: none; /* Prevent interaction when hidden */
   transition: opacity 0.3s;
@@ -125,12 +140,12 @@ section > div p {
   z-index: 2;
 }
 
-section > div:hover p {
+.timeline > div:hover p {
   opacity: 1; /* Show text on hover */
   pointer-events: auto;
 }
 
-section > div img {
+.timeline > div img {
   z-index: 1;
   position: relative;
 }
@@ -189,7 +204,7 @@ p {
 
 /* Make timeline cards stack vertically on small screens (mobile) */
 @media (max-width: 600px) {
-  section {
+  .timeline {
     flex-direction: column; /* Stack cards vertically */
     gap: 20px;              /* Space between cards */
     align-items: center;    /* Center cards horizontally */
@@ -198,12 +213,12 @@ p {
     margin: 0;
     scroll-snap-type: none; /* Disable scroll snap on mobile */
   }
-  section > div {
+  .timeline > div {
     min-width: 90vw;        /* Make cards take most of the screen width */
     max-width: 95vw;
     scroll-snap-align: none;
   }
-  section img {
+  .timeline img {
     width: 100%;            /* Make images fill the card width */
     height: 200px;          /* Uniform height for all images on mobile */
     object-fit: cover;      /* Crop images to fill the area without distortion */
@@ -212,12 +227,109 @@ p {
     margin: 0 auto 10px auto;
   }
   /* On mobile, allow tap to reveal card text instead of hover */
-  section > div p {
+  .timeline > div p {
     opacity: 0;
     pointer-events: none;
   }
-  section > div.reveal p {
+  .timeline > div.reveal p {
     opacity: 1;
     pointer-events: auto;
   }
+}
+
+/* Add margin below columns in the new section */
+.container .col-md-4 {
+  margin-bottom: 4rem; /* Add spacing below each column */
+}
+
+/* Style for Learn More buttons */
+.btn-primary {
+  background-color: #155a8a; /* Intel blue */
+  color: #fff; /* White text */
+  border: none; /* Remove border */
+  padding: 10px 20px; /* Add padding */
+  font-size: 1em; /* Standard font size */
+  border-radius: 5px; /* Rounded corners */
+  transition: background-color 0.3s ease; /* Smooth hover effect */
+}
+
+.btn-primary:hover {
+  background-color: #1e7bbf; /* Lighter blue on hover */
+}
+
+/* Style for modal close button */
+.close {
+  background: none; /* Remove background */
+  border: none; /* Remove border */
+  font-size: 1.5em; /* Make the close icon larger */
+  color: #333; /* Dark gray color for visibility */
+  cursor: pointer; /* Change cursor to pointer */
+  padding: 0; /* Remove padding */
+}
+
+.close:hover {
+  color: #155a8a; /* Change color to Intel blue on hover */
+}
+
+/* Style for the subscription form section */
+form {
+  max-width: 600px; /* Limit form width */
+  margin: 0 auto; /* Center the form */
+  padding: 20px; /* Add padding inside the form */
+  background: #fff; /* White background for the form */
+  border-radius: 8px; /* Rounded corners */
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+}
+
+form .form-label {
+  font-weight: bold; /* Make labels bold */
+  color: #155a8a; /* Intel blue for labels */
+}
+
+form .form-control {
+  border: 1px solid #ccc; /* Light gray border */
+  border-radius: 4px; /* Rounded corners for inputs */
+}
+
+form .btn-primary {
+  background-color: #155a8a; /* Intel blue */
+  color: #fff; /* White text */
+  border: none; /* Remove border */
+  padding: 10px 20px; /* Add padding */
+  font-size: 1em; /* Standard font size */
+  border-radius: 5px; /* Rounded corners */
+  transition: background-color 0.3s ease; /* Smooth hover effect */
+}
+
+form .btn-primary:hover {
+  background-color: #1e7bbf; /* Lighter blue on hover */
+}
+
+/* Center the subscription form section */
+section.container {
+  display: flex; /* Use flexbox for centering */
+  justify-content: center; /* Center horizontally */
+  align-items: center; /* Center vertically */
+}
+
+.triple-column {
+  margin-bottom: 0;
+}
+
+/* Footer styles */
+footer {
+  background-color: #333; /* Dark background */
+  color: #fff; /* White text */
+  padding: 20px 0; /* Vertical padding */
+  text-align: center; /* Center text */
+}
+
+footer a {
+  color: #fff; /* White links */
+  text-decoration: none; /* Remove underline */
+  margin: 0 10px; /* Space between links */
+}
+
+footer a:hover {
+  text-decoration: underline; /* Add underline on hover */
 }
